@@ -2,11 +2,8 @@ package ru.home.service.resolver.file;
 
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
-import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Document;
 import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.home.service.BotCommonService;
 
 import java.util.Objects;
@@ -21,32 +18,18 @@ public class TextFileBotResolver extends FileBotResolver {
     }
 
     @Override
-    public boolean canResolveMessage(Update update) {
-        return super.canResolveMessage(update) && identifyFileType(update);
-    }
-
-    @Override
-    protected boolean identifyFileType(Update update) {
-        if (update.getMessage().hasDocument()) {
-            Document document = update.getMessage().getDocument();
+    protected boolean identifyFileType(Message message) {
+        if (message.hasDocument()) {
+            Document document = message.getDocument();
             return Objects.equals(document.getMimeType(), TXT.getMimeType()) || document.getFileName().endsWith(TXT.getSuffix());
         }
         return false;
     }
 
     @Override
-    protected EditMessageText processCallbackQuery(CallbackQuery callbackQuery) {
-        throw new RuntimeException("Not supported!!!");
+    protected SendMessage resolveMessage(Message message) {
+        return super.resolveMessage(message);
     }
 
-    @Override
-    protected SendMessage processMessage(Message telegramMessage) {
-    throw new RuntimeException("Not supported!!!");
-    }
-
-    @Override
-    public boolean canResolveCallBack(Update update) {
-        return false;
-    }
 
 }

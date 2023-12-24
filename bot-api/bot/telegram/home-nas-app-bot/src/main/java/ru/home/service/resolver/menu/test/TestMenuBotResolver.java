@@ -2,10 +2,8 @@ package ru.home.service.resolver.menu.test;
 
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
-import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import ru.home.base.MessageHandler;
 import ru.home.service.BotCommonService;
 import ru.home.service.enums.MenuCommands;
@@ -23,22 +21,18 @@ public class TestMenuBotResolver extends MenuBotResolver implements MessageHandl
     }
 
     @Override
-    protected boolean identifyCommand(Update update) {
-        return Objects.equals(update.getMessage().getEntities().get(0).getText(), COMMAND);
+    protected boolean identifyCommand(Message message) {
+        String entityText = message.getEntities().stream()
+                .findFirst()
+                .map(MessageEntity::getText)
+                .orElse(MenuCommands.UNDEFINED);
+        return Objects.equals(entityText, COMMAND);
     }
 
     @Override
-    protected EditMessageText processCallbackQuery(CallbackQuery callbackQuery) {
-        return null;
-    }
-
-    @Override
-    protected SendMessage processMessage(Message telegramMessage) {
+    protected SendMessage resolveMessage(Message telegramMessage) {
         return getPreFilledMessage(telegramMessage).text("Test").build();
     }
 
-    @Override
-    public boolean canResolveCallBack(Update update) {
-        return false;
-    }
+
 }

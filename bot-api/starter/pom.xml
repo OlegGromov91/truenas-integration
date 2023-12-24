@@ -19,12 +19,6 @@
     <dependencies>
         <dependency>
             <groupId>ru.home</groupId>
-            <artifactId>telegram</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>ru.home</groupId>
             <artifactId>home-nas-app-bot</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>

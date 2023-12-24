@@ -1,7 +1,7 @@
 package ru.home.configuration;
 
 import ru.home.service.enums.MenuCommands;
-import ru.home.service.enums.TorrentMenuResolverButtonData;
+import ru.home.service.enums.TorrentMenuButton;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -25,7 +25,7 @@ public class BotConfiguration {
     public InlineKeyboardMarkup torrentMenuInlineKeyboardMarkup() {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         inlineKeyboardMarkup.setKeyboard(
-                Arrays.stream(TorrentMenuResolverButtonData.values()).map(button -> List.of(button.getButton())).collect(Collectors.toList())
+                Arrays.stream(TorrentMenuButton.values()).map(button -> List.of(button.getButton())).collect(Collectors.toList())
         );
         return inlineKeyboardMarkup;
     }

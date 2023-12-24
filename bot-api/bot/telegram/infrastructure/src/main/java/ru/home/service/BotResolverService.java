@@ -20,13 +20,15 @@ public class BotResolverService {
     private List<BotResolver> resolvers = new ArrayList<>();
 
     public BotApiMethod<? extends Serializable> resolve(Update update) {
+        BotResolver botResolver = extractResolver(update);
+        return botResolver.resolve(update);
+    }
 
-        BotResolver botResolver = resolvers.stream()
+    private BotResolver extractResolver(Update update) {
+        return resolvers.stream()
                 .filter(resolver -> resolver.identifyResolver(update))
                 .findFirst()
                 .orElseThrow(() -> new BotResolveException("Can not find resolver"));
-        return botResolver.resolve(update);
-
     }
 
 

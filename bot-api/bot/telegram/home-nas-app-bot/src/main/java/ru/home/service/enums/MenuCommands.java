@@ -13,6 +13,7 @@ public enum MenuCommands {
     private final String description;
     private final BotCommand botCommand;
     public static final String TYPE = "bot_command";
+    public static final String UNDEFINED = "UNDEFINED";
 
 
     MenuCommands(String command, String description, BotCommand botCommand) {
