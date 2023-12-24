@@ -1,6 +1,7 @@
 server:
   port: 8096
 
+
 bot:
   name: "home_nas_app_bot"
   token: ""
@@ -22,5 +23,14 @@ home-application:
                   "Другое":"/other"
         }'
 
+spring:
+  data:
+    mongodb:
+      authentication-database: admin
+      password: "dev"
+      username: "dev"
+      database: "test"
+      port: 27017
+      host: "localhost"
 
 
