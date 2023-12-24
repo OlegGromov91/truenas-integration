@@ -1,0 +1,11 @@
+server:
+  port: 8096
+
+bot:
+  name: "home_nas_app_bot"
+  token: ""
+  file-info: "https://api.telegram.org/bot{token}/getFile?file_id={fileId}"
+  file-storage: "https://api.telegram.org/file/bot{token}/{filePath}"
+
+
+
