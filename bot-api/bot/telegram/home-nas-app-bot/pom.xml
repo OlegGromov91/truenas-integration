@@ -5,23 +5,23 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>ru.home</groupId>
-        <artifactId>bot</artifactId>
+        <artifactId>telegram</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>telegram</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>infrastructure</module>
-        <module>home-nas-app-bot</module>
-    </modules>
+    <artifactId>home-nas-app-bot</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-
+    <dependencies>
+        <dependency>
+            <groupId>ru.home</groupId>
+            <artifactId>infrastructure</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

@@ -7,5 +7,20 @@ bot:
   file-info: "https://api.telegram.org/bot{token}/getFile?file_id={fileId}"
   file-storage: "https://api.telegram.org/file/bot{token}/{filePath}"
 
+home-application:
+  torrent-category:
+    root-dataset-media-path: "/media"
+    mappings:
+      '{
+                  "Музыка":"/music",
+                  "Видео":"/videos",
+                  "Фильм":"/films",
+                  "Сериал":"/serials",
+                  "Игра":"/games",
+                  "Программы":"/program",
+                  "Операционные системы":"/os",
+                  "Другое":"/other"
+        }'
+
 
 

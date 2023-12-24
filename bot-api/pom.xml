@@ -11,12 +11,15 @@
     <modules>
         <module>starter</module>
         <module>bot</module>
+        <module>core</module>
     </modules>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <telegram.bot.version>6.8.0</telegram.bot.version>
+        <guava.version>31.1-jre</guava.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -45,5 +48,23 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+        <!-- telegram -->
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots</artifactId>
+            <version>${telegram.bot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots-spring-boot-starter</artifactId>
+            <version>${telegram.bot.version}</version>
+        </dependency>
+
+
     </dependencies>
 </project>

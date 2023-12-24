@@ -5,15 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>ru.home</groupId>
-        <artifactId>bot</artifactId>
+        <artifactId>bot-api</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>telegram</artifactId>
+    <artifactId>core</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>infrastructure</module>
-        <module>home-nas-app-bot</module>
+        <module>data</module>
     </modules>
 
     <properties>
@@ -21,7 +20,5 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-
 
 </project>
