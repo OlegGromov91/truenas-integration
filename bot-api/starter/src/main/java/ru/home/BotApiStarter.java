@@ -5,15 +5,32 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import ru.home.bot.HomeNasAppTgBot;
+import ru.home.model.file.FileType;
+import ru.home.model.file.SmallFile;
+import ru.home.model.user.TelegramUser;
+import ru.home.repository.RepositoryFactory;
+
+
+import java.util.List;
+import java.util.Optional;
 
 @SpringBootApplication(scanBasePackages = "ru.home")
+//@EnableJpaRepositories(basePackages = {"ru.home"})
 @EntityScan(basePackages = {"ru.home"})
+@EnableMongoRepositories(basePackages = {"ru.home"})
 public class BotApiStarter implements CommandLineRunner {
-
 
     @Autowired
     private HomeNasAppTgBot telegramBot;
+    @Autowired
+    private TelegramUserRepository repo;
+    @Autowired
+    private SmallFileRepository fileRepo;
+    @Autowired
+    private RepositoryFactory repos;
+
 
     public static void main(String[] args) {
         SpringApplication.run(BotApiStarter.class, args);
@@ -21,6 +38,36 @@ public class BotApiStarter implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
+        String image = "ssssssssssssdasad";
+
+        TelegramUser user = TelegramUser.builder()
+                .firstName("lolol")
+                .tgId(110L)
+                .name("sdsd")
+                .userName("yellow")
+                .email("gg@mail.ru")
+                .build();
+        user = repos.save(user);
+
+
+
+        SmallFile testFile = SmallFile.builder()
+                .fileName("test_name_test")
+                .filePath("file_path_test")
+                .type(FileType.TORRENT)
+                .file(SmallFile.toBinary(image.getBytes()))
+                .userId(user.getId())
+                .build();
+
+        testFile = repos.save(testFile);
+
+       SmallFileRepository rr = repos.getRepository(testFile.getClass());
+
+        Optional<SmallFile> tr = fileRepo.findById(testFile.getId());
+        Optional<SmallFile> tr2 = fileRepo.findByUserId(user.getId());
+
+        System.out.println(tr);
 
     }
 }

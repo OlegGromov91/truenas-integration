@@ -5,16 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>ru.home</groupId>
-        <artifactId>bot-api</artifactId>
+        <artifactId>bot</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>bot</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>telegram</module>
-        <module>infrastructure</module>
-    </modules>
+    <artifactId>infrastructure</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

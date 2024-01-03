@@ -13,6 +13,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>data</module>
+        <module>data-infrastructure</module>
+        <module>repository</module>
     </modules>
 
     <properties>

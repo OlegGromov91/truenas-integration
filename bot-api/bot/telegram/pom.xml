@@ -12,7 +12,6 @@
     <artifactId>telegram</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>infrastructure</module>
         <module>home-nas-app-bot</module>
     </modules>
 
