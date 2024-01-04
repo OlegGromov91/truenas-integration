@@ -5,7 +5,6 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import ru.home.base.MessageHandler;
-import ru.home.service.BotCommonService;
 import ru.home.service.enums.MenuCommands;
 import ru.home.service.resolver.menu.MenuBotResolver;
 
@@ -15,10 +14,6 @@ import java.util.Objects;
 public class TestMenuBotResolver extends MenuBotResolver implements MessageHandler {
 
     private static final String COMMAND = MenuCommands.TEST.getCommand();
-
-    protected TestMenuBotResolver(BotCommonService commonService) {
-        super(commonService);
-    }
 
     @Override
     protected boolean identifyCommand(Message message) {

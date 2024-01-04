@@ -1,0 +1,57 @@
+package ru.home.service;
+
+import lombok.RequiredArgsConstructor;
+import org.json.JSONObject;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ru.home.bot.HomeNasAppTgBot;
+import ru.home.model.file.FileType;
+import ru.home.model.file.SmallFile;
+import ru.home.model.user.TelegramUser;
+import ru.home.mongo.SmallFileRepository;
+import ru.home.mongo.TelegramUserRepository;
+import ru.home.repository.RepositoryFactory;
+
+import java.util.Comparator;
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+@Transactional
+public class TelegramCommonService implements BotCommonService<HomeNasAppTgBot> {
+
+    private final RestTelegramService restService;
+    private final RepositoryFactory repository;
+
+    public void getFileInfo(String fileId, String fileName, Long userTgId) {
+        TelegramUserRepository userRepository = repository.getRepository(TelegramUser.class);
+        TelegramUser user = userRepository.findByTgId(userTgId).orElseThrow(() -> new RuntimeException(String.format("cannot find user by tgId=%s", userTgId)));
+        JSONObject fileInfo = restService.getFileInfo(fileId);
+
+        String filePath = fileInfo.getJSONObject("result").getString("file_path");
+
+        SmallFile torrentFile = SmallFile.builder()
+                .type(FileType.TORRENT)
+                .userId(user.getId())
+                .filePath(filePath)
+                .fileName(fileName)
+                .build();
+
+        repository.save(torrentFile);
+    }
+
+    @Transactional
+    public void handleFileToTorrentClient(Long userTgId, String path, String category) {
+        TelegramUserRepository userRepository = repository.getRepository(TelegramUser.class);
+        TelegramUser user = userRepository.findByTgId(userTgId).orElseThrow(() -> new RuntimeException(String.format("cannot find user by tgId=%s", userTgId)));
+        SmallFileRepository fileRepository = repository.getRepository(SmallFile.class);
+        List<SmallFile> tgFiles = fileRepository.findByUserId(user.getId());
+        SmallFile tgFile = tgFiles.stream().max(Comparator.comparing(SmallFile::getCreatingDate)).orElseThrow(RuntimeException::new);
+
+        byte[] file = restService.downloadFileFromTelegram(tgFile.getFilePath());
+        tgFile.setFile(SmallFile.toBinary(file));
+        repository.save(tgFile);
+        // todo: kafka = qbTorrentService.downloadTorrent(file, tgFile.getFileName(), path, category);
+        System.out.println("файл успешно отправлен в торрент клиент");
+    }
+}

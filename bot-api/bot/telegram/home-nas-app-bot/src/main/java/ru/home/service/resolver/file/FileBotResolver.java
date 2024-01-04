@@ -6,14 +6,8 @@ import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.home.base.AbstractBotResolver;
-import ru.home.service.BotCommonService;
 
 public abstract class FileBotResolver extends AbstractBotResolver {
-
-
-    protected FileBotResolver(BotCommonService commonService) {
-        super(commonService);
-    }
 
     @Override
     public boolean canResolveMessage(Message message) {

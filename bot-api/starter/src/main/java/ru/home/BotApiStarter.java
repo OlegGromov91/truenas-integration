@@ -10,6 +10,8 @@ import ru.home.bot.HomeNasAppTgBot;
 import ru.home.model.file.FileType;
 import ru.home.model.file.SmallFile;
 import ru.home.model.user.TelegramUser;
+import ru.home.mongo.SmallFileRepository;
+import ru.home.mongo.TelegramUserRepository;
 import ru.home.repository.RepositoryFactory;
 
 
@@ -24,10 +26,6 @@ public class BotApiStarter implements CommandLineRunner {
 
     @Autowired
     private HomeNasAppTgBot telegramBot;
-    @Autowired
-    private TelegramUserRepository repo;
-    @Autowired
-    private SmallFileRepository fileRepo;
     @Autowired
     private RepositoryFactory repos;
 
@@ -64,10 +62,11 @@ public class BotApiStarter implements CommandLineRunner {
 
        SmallFileRepository rr = repos.getRepository(testFile.getClass());
 
-        Optional<SmallFile> tr = fileRepo.findById(testFile.getId());
-        Optional<SmallFile> tr2 = fileRepo.findByUserId(user.getId());
+        Optional<SmallFile> tr = rr.findById(testFile.getId());
+        List<SmallFile> tr2 = rr.findByUserId(user.getId());
 
         System.out.println(tr);
+        System.out.println(tr2);
 
     }
 }

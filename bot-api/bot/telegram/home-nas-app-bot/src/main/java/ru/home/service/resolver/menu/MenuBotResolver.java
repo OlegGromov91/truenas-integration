@@ -6,16 +6,10 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.home.base.AbstractBotResolver;
-import ru.home.service.BotCommonService;
 import ru.home.service.enums.MenuCommands;
 
 
 public abstract class MenuBotResolver extends AbstractBotResolver {
-
-
-    protected MenuBotResolver(BotCommonService commonService) {
-        super(commonService);
-    }
 
     @Override
     public boolean canResolveMessage(Message message) {

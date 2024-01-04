@@ -11,6 +11,8 @@ import ru.home.model.base.Identifier;
 import javax.annotation.PostConstruct;
 import java.util.*;
 
+import static java.util.Objects.isNull;
+
 //todo mb genericTypeResolver?
 @Component
 public class RepositoryFactory {
@@ -100,9 +102,13 @@ public class RepositoryFactory {
     }
 
     public <I extends Identifier, T extends ApplicationMongoRepository> T getRepository(Class<I> entityClass) {
+        if (isNull(entityClass)) {
+            throw new UnsupportedOperationException("entityClass is null");
+        }
         return Optional.ofNullable(repositoryMap.get(entityClass))
                 .map(repository -> (T) repository)
                 .orElseThrow(() -> new UnsupportedOperationException(String.format("cannot find repository for %s method getType() should be overridden in repo", entityClass)));
     }
+
 
 }

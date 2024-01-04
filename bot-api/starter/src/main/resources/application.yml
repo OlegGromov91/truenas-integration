@@ -8,6 +8,9 @@ bot:
   file-info: "https://api.telegram.org/bot{token}/getFile?file_id={fileId}"
   file-storage: "https://api.telegram.org/file/bot{token}/{filePath}"
 
+rest:
+  request-timeout: 1
+
 home-application:
   torrent-category:
     root-dataset-media-path: "/media"
@@ -29,8 +32,9 @@ spring:
       authentication-database: admin
       password: "dev"
       username: "dev"
-      database: "test"
+      database: "home_app"
       port: 27017
       host: "localhost"
+      auto-index-creation: false
 
 

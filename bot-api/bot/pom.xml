@@ -13,7 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>telegram</module>
-        <module>infrastructure</module>
+        <module>common</module>
     </modules>
 
     <properties>

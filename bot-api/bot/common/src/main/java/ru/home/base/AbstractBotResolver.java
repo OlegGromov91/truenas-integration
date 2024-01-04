@@ -6,17 +6,10 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageTe
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import ru.home.service.BotCommonService;
 
 import java.io.Serializable;
 
 public abstract class AbstractBotResolver extends AbstractMarkupAbleBotResolver {
-
-    protected final BotCommonService commonService;
-
-    protected AbstractBotResolver(BotCommonService commonService) {
-        this.commonService = commonService;
-    }
 
     @Override
     public BotApiMethod<? extends Serializable> resolve(Update update) {
