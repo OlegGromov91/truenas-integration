@@ -1,17 +1,22 @@
 package ru.home.service.resolver.file;
 
+import com.google.common.base.Strings;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
+import org.telegram.telegrambots.meta.api.objects.Document;
 import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.home.base.AbstractBotResolver;
 
 public abstract class FileBotResolver extends AbstractBotResolver {
 
     @Override
     public boolean canResolveMessage(Message message) {
-        return identifyFileType(message);
+        if (message.hasDocument()) {
+            Document document = message.getDocument();
+            return identifyFileType(document);
+        }
+        return false;
     }
 
     @Override
@@ -25,11 +30,13 @@ public abstract class FileBotResolver extends AbstractBotResolver {
     }
 
     @Override
-    public boolean canResolveCallBack(Update update) {
-        return false;
+    public boolean canResolveCallBack(CallbackQuery callbackQuery) {
+        return !Strings.isNullOrEmpty(callbackQuery.getData()) && identifyCallBackData(callbackQuery.getData());
     }
 
-    protected abstract boolean identifyFileType(Message message);
+    protected abstract boolean identifyFileType(Document document);
+
+    protected abstract boolean identifyCallBackData(String callbackData);
 
 
 }

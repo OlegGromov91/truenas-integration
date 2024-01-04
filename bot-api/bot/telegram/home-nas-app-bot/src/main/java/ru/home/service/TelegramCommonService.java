@@ -41,7 +41,7 @@ public class TelegramCommonService implements BotCommonService<HomeNasAppTgBot> 
     }
 
     @Transactional
-    public void handleFileToTorrentClient(Long userTgId, String path, String category) {
+    public void handleFileToTorrentClient(Long userTgId, String category) {
         TelegramUserRepository userRepository = repository.getRepository(TelegramUser.class);
         TelegramUser user = userRepository.findByTgId(userTgId).orElseThrow(() -> new RuntimeException(String.format("cannot find user by tgId=%s", userTgId)));
         SmallFileRepository fileRepository = repository.getRepository(SmallFile.class);

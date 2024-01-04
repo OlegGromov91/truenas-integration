@@ -29,7 +29,7 @@ public abstract class MenuBotResolver extends AbstractBotResolver {
     }
 
     @Override
-    public boolean canResolveCallBack(Update update) {
+    public boolean canResolveCallBack(CallbackQuery callbackQuery) {
         return false;
     }
 

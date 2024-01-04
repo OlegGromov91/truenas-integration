@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public abstract class AbstractMarkupAbleBotResolver implements BotResolver {
 
-    private static final int INITIAL_MAX_BUTTON_SIZE_ON_ROW = 3;
+    protected static final int INITIAL_MAX_BUTTON_SIZE_ON_ROW = 3;
 
     protected InlineKeyboardMarkup buildKeyboardKeyboardMarkup(Map<String, String> textAndCallBackData) {
         return buildKeyboardKeyboardMarkup(INITIAL_MAX_BUTTON_SIZE_ON_ROW, textAndCallBackData);

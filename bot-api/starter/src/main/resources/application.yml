@@ -1,7 +1,6 @@
 server:
   port: 8096
 
-
 bot:
   name: "home_nas_app_bot"
   token: ""
@@ -11,20 +10,8 @@ bot:
 rest:
   request-timeout: 1
 
-home-application:
-  torrent-category:
-    root-dataset-media-path: "/media"
-    mappings:
-      '{
-                  "Музыка":"/music",
-                  "Видео":"/videos",
-                  "Фильм":"/films",
-                  "Сериал":"/serials",
-                  "Игра":"/games",
-                  "Программы":"/program",
-                  "Операционные системы":"/os",
-                  "Другое":"/other"
-        }'
+file:
+  category: Музыка,Видео,Фильм,Сериал,Игра,Программы,Операционные системы,Другое
 
 spring:
   data:
