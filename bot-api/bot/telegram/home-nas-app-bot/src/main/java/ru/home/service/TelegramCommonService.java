@@ -11,6 +11,7 @@ import ru.home.model.file.FileType;
 import ru.home.model.file.SmallFile;
 import ru.home.model.user.TelegramUser;
 import ru.home.repository.RepositoryFactory;
+import ru.home.repository.mongo.SmallFileRepository;
 
 import java.util.Comparator;
 import java.util.List;
@@ -43,7 +44,6 @@ public class TelegramCommonService implements BotCommonService<HomeNasAppTgBot> 
     @Transactional
     public void handleFileToTorrentClient(Long userTgId, String category) {
         TelegramUser user = repository.criteria().searchOrThrow(TelegramUserCriteria.builder().tgId(userTgId).build());
-
         List<SmallFile> tgFiles = repository.criteria().search(SmallFileCriteria.builder().userId(user.getId()).build());
         SmallFile tgFile = tgFiles.stream().max(Comparator.comparing(SmallFile::getCreatingDate)).orElseThrow(RuntimeException::new);
 

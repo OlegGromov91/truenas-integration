@@ -10,7 +10,10 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import ru.home.bot.HomeNasAppTgBot;
+import ru.home.criteria.base.DirectionSorting;
+import ru.home.criteria.mongo.SmallFileCriteria;
 import ru.home.criteria.mongo.TelegramUserCriteria;
+import ru.home.model.file.SmallFile;
 import ru.home.model.user.TelegramUser;
 import ru.home.repository.RepositoryFactory;
 import ru.home.repository.mongo.TelegramUserRepository;
@@ -66,6 +69,9 @@ public class BotApiStarter implements CommandLineRunner {
         Query query = new Query();
         query.addCriteria(Criteria.where("tgId").is("544908050"));
         List<TelegramUser> rg = mongoTemplate.find(query, TelegramUser.class);
+
+
+        Optional<SmallFile> smallFile = repos.criteria().searchLast(SmallFileCriteria.sortByCreatingDate());
 
         System.out.println(telegramUser);
 //        Query query = new Query();

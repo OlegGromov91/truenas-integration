@@ -4,12 +4,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import ru.home.criteria.base.AbstractMongoCriteria;
 import ru.home.model.user.TelegramUser;
 
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @ToString
 public class TelegramUserCriteria extends AbstractMongoCriteria<TelegramUser> {
 
