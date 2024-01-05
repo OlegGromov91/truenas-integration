@@ -1,10 +1,9 @@
-package ru.home.mongo;
+package ru.home.repository.mongo;
 
-import ru.home.base.ApplicationMongoRepository;
+import ru.home.repository.base.ApplicationMongoRepository;
 import ru.home.model.file.SmallFile;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface SmallFileRepository extends ApplicationMongoRepository<SmallFile> {
 

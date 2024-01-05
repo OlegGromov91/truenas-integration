@@ -1,12 +1,13 @@
 package ru.home.repository;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
-import ru.home.base.ApplicationMongoRepository;
 import ru.home.model.base.Identifier;
+import ru.home.repository.base.ApplicationMongoRepository;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
@@ -15,12 +16,15 @@ import static java.util.Objects.isNull;
 
 //todo mb genericTypeResolver?
 @Component
+@RequiredArgsConstructor
 public class RepositoryFactory {
 
-    @Autowired
+    @Autowired(required = false)
     @Lazy
     private Set<? extends ApplicationMongoRepository<? extends Identifier>> mongoRepositories = new HashSet<>();
     private final Map<Class<? extends Identifier>, ApplicationMongoRepository<? extends Identifier>> repositoryMap = new HashMap<>();
+
+    private final RepositoryCriteriaFactory criteriaFactory;
 
     @PostConstruct
     protected void init() {
@@ -110,5 +114,8 @@ public class RepositoryFactory {
                 .orElseThrow(() -> new UnsupportedOperationException(String.format("cannot find repository for %s method getType() should be overridden in repo", entityClass)));
     }
 
+    public RepositoryCriteriaFactory criteria() {
+        return criteriaFactory;
+    }
 
 }

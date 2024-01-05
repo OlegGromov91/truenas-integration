@@ -1,6 +1,6 @@
-package ru.home.mongo;
+package ru.home.repository.mongo;
 
-import ru.home.base.ApplicationMongoRepository;
+import ru.home.repository.base.ApplicationMongoRepository;
 import ru.home.model.user.TelegramUser;
 
 import java.util.Optional;

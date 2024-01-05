@@ -1,4 +1,4 @@
-package ru.home.base;
+package ru.home.repository.base;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import ru.home.model.base.Identifier;
