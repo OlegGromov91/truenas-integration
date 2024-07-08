@@ -44,9 +44,10 @@ class CriteriaHelper {
                     mongoCriteria = mongoCriteria.and(field.getName()).is(field.get(criteria));
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException(e);
+                } finally {
+                    field.setAccessible(false);
                 }
             }
-            field.setAccessible(false);
         }
         return mongoCriteria;
     }

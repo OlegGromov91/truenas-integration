@@ -1,5 +1,7 @@
 package ru.home.configuration;
 
+import lombok.Getter;
+import lombok.Setter;
 import ru.home.service.enums.MenuCommands;
 import ru.home.service.enums.TorrentMenuButton;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +22,13 @@ import static org.springframework.beans.factory.config.ConfigurableBeanFactory.S
 
 @Configuration
 public class BotConfiguration {
+
+    @Getter
+    @Setter
+    public static class Torrent {
+        private String category;
+        private String categoryFolder;
+    }
 
     @Bean(value = "torrentMenuInlineKeyboardMarkup")
     public InlineKeyboardMarkup torrentMenuInlineKeyboardMarkup() {

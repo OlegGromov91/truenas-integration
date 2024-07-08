@@ -3,7 +3,7 @@ server:
 
 bot:
   name: "home_nas_app_bot"
-  token: ""
+  token:
   file-info: "https://api.telegram.org/bot{token}/getFile?file_id={fileId}"
   file-storage: "https://api.telegram.org/file/bot{token}/{filePath}"
 
@@ -12,6 +12,55 @@ rest:
 
 file:
   category: Музыка,Видео,Фильм,Сериал,Игра,Программы,Операционные системы,Другое
+
+available-torrent-categories-list:
+  channelConfigurations:
+    - category: "Музыка"
+      categoryFolder: "/music"
+    - category: "Видео"
+      categoryFolder: "/video"
+    - category: "Фильм"
+      categoryFolder: "/movies"
+    - category: "Сериал"
+      categoryFolder: "/shows"
+    - category: "Игра"
+      categoryFolder: "/games"
+    - category: "Программы"
+      categoryFolder: "/programs"
+    - category: "Операционные системы"
+      categoryFolder: "os"
+    - category: "Другое"
+      categoryFolder: "other"
+
+
+#torrent:
+#   -
+#     category: Музыка
+#     category-folder: music
+#  - category: Видео
+#    category-folder: video
+#  - category: Фильм
+#    category-folder: film
+#  - category: Сериал
+#    category-folder: shows
+
+
+
+
+#  users:
+#    -
+#      username: admin
+#      password: admin@10@
+#      roles:
+#        - READ
+#        - WRITE
+#        - VIEW
+#        - DELETE
+#    -
+#      username: guest
+#      password: guest@01
+#      roles:
+#        - VIEW
 
 spring:
   data:
@@ -22,6 +71,20 @@ spring:
       database: "home_app"
       port: 27017
       host: "localhost"
-      auto-index-creation: false
+      auto-index-creation: true
+  kafka:
+    bootstrap-servers: localhost:29092
+    template:
+      default-topic: bot
+
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG
 
 

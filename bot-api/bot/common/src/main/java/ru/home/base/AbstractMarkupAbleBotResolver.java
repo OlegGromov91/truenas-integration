@@ -20,8 +20,8 @@ public abstract class AbstractMarkupAbleBotResolver implements BotResolver {
 
         List<InlineKeyboardButton> buttons = textAndCallBackData.entrySet().stream()
                 .map(entry -> InlineKeyboardButton.builder()
-                        .text(entry.getKey())
-                        .callbackData(entry.getValue())
+                        .text(entry.getValue())
+                        .callbackData(entry.getKey())
                         .build())
                 .collect(Collectors.toList());
 
